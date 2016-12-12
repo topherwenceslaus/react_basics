@@ -1,0 +1,97 @@
+<html>
+<head>
+        <title> Track mouse clicks in react</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+    <div id="screen"></div>
+
+
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+<script type="text/babel">
+
+function writeInScreen(msg){
+  var elem = document.getElementById('screen');
+    elem.innerHTML += '<div class="log bg-' + msg + '">' +
+    '<span class="glyphicon glyphicon-ok"></span> &nbsp;&nbsp;' +
+      msg +
+    '</div>';
+}
+
+
+var Clock = React.createClass({
+
+    getInitialState:function(){
+        writeInScreen("getInitialState");
+        return {count:0};
+    },
+
+    shouldComponentUpdate:function(){
+        writeInScreen("shouldComponentUpdate");
+        return true;
+    },
+
+    componentWillUpdate:function(){
+          writeInScreen("componentWillUpdate");
+    },
+
+    componentDidUpdate:function(){
+          writeInScreen("componentDidUpdate");
+    },
+
+
+    getDefaultProps:function(){
+      writeInScreen("getDefaultProps");
+          return {count: 2};;
+    },
+
+    componentWillMount:function(){
+        writeInScreen("componentWillMount");
+    },
+
+    updateState:function(){
+        this.setState({count:1});
+        this.props.count= 1;
+    },
+
+    render:function() {
+        writeInScreen("render");
+        return (<button onClick={this.updateState}>
+            updateState
+          </button>
+        );
+    },
+
+    componentDidMount:function(){
+          writeInScreen("componentDidMount");
+    },
+
+    componentWillReceiveProps:function(){
+        writeInScreen("componentWillReceiveProps");
+        this.setState({count:2});
+    }
+
+});
+
+
+  ReactDOM.render(
+    <Clock />,
+    document.getElementById('root')
+  );
+
+
+
+
+</script>
+
+
+</html>
