@@ -1,0 +1,70 @@
+<html>
+<head>
+        <title> Track mouse clicks in react</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+<script type="text/babel">
+
+function Login(p){
+    return (
+        <div>
+        <p> Welcome!!!!Log In </p>
+        <button onClick={p.onClick}> Log iN </button>
+        </div>
+    );
+}
+
+function Logout(p){
+    return (
+        <div>
+        <p> thanks!!!!Log out </p>
+        <button onClick={p.onClick}> Log out </button>
+        </div>
+    );
+}
+
+
+var Fanpage = React.createClass({
+
+  getInitialState:function(){
+      return({loggedin:false});
+  },
+
+  logout:function(){
+    this.setState({loggedin:false});
+  },
+
+  login:function(){
+    this.setState({loggedin:true});
+  },
+
+
+
+  render:function(){
+    var Log = this.state.loggedin ? <Logout onClick={this.logout}/> : <Login onClick={this.login}/>;
+    return (
+      <span>
+          {Log}
+        </span>
+    );
+  }
+
+
+});
+
+ReactDOM.render(<Fanpage />,document.getElementById("root"));
+</script>
+
+
+</html>
