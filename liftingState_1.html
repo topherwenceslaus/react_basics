@@ -1,0 +1,114 @@
+<html>
+<head>
+        <title> Track mouse clicks in react</title>
+</head>
+
+<body>
+
+  <div id="div1"></div>
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+<script type="text/babel">
+
+    function IsbolingPoint(p){
+        if(p.celsius > 100){
+            return <p> Water has boiled </p>
+        }else{
+            return <p> Water has to boil!!! </p>
+        }
+    }
+
+    const scaleNames = {
+  c: 'Celsius',
+  f: 'Fahrenheit'
+};
+
+    function toCelsius(fahrenheit) {
+      return (fahrenheit - 32) * 5 / 9;
+    }
+
+    function toFahrenheit(celsius) {
+      return (celsius * 9 / 5) + 32;
+    }
+
+    function tryConvert(value, convert) {
+        const input = parseFloat(value);
+        if (Number.isNaN(input)) {
+          return '';
+        }
+        const output = convert(input);
+        const rounded = Math.round(output * 1000) / 1000;
+        return rounded.toString();
+    }
+
+      var Temperture = React.createClass({
+
+          render: function(){
+            const value = this.props.value;
+            const scale = this.props.scale;
+
+              return(
+                <fieldset>
+                <legend>Enter temperature in {scaleNames[scale]}:</legend>
+                <input value={value}
+                       onChange={this.props.onChange} />
+              </fieldset>
+              );
+
+
+          }
+
+      });
+
+
+      var Calc = React.createClass({
+
+          getInitialState: function(){
+
+              return({value: '', scale: 'c'});
+          },
+
+          handleCelsiusChange(e) {
+ this.setState({scale: 'c', value:e.target.value});
+},
+
+handleFahrenheitChange(e) {
+ this.setState({scale: 'f', value:e.target.value});
+},
+
+          render:function() {
+            const scale = this.state.scale;
+            const value = this.state.value;
+            const celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
+            const fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
+
+              return(
+                  <div>
+                  <Temperture
+       scale="c"
+       value={celsius}
+       onChange={this.handleCelsiusChange} />
+     <Temperture
+       scale="f"
+       value={fahrenheit}
+       onChange={this.handleFahrenheitChange} />
+     <IsbolingPoint
+       celsius={parseFloat(celsius)} />
+                  </div>
+              );
+          }
+
+      });
+
+       ReactDOM.render(<Calc/>,document.getElementById("div1"));
+
+</script>
+
+
+</html>

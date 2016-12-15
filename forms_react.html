@@ -1,0 +1,51 @@
+<html>
+<head>
+        <title> Track mouse clicks in react</title>
+</head>
+
+<body>
+
+  <div id="div1"></div>
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+<script type="text/babel">
+
+      var Form = React.createClass({
+
+          getInitialState:function(){
+              return({value:""});
+          },
+
+          handleChange:function(e){
+              this.setState({value:e.target.value})
+          },
+
+          onsubmit:function(){
+              alert(this.state.value);
+          },
+
+          render:function(){
+                return (
+                    <form onSubmit={this.onsubmit}>
+                    <label >
+                        Enter your Name
+                    </label>
+                     <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        <button type="submit">Submit</button>
+                    </form>
+                );
+          }
+      });
+
+       ReactDOM.render(<Form/>,document.getElementById("div1"));
+
+</script>
+
+
+</html>
