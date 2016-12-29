@@ -1,0 +1,122 @@
+<html>
+<head>
+        <title> Track mouse clicks in react</title>
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+        <style>
+        body{
+          background-color: black;
+          font-size: 28px;
+
+        }
+span{
+  position: relative;
+top: 33%;
+left: 45%;
+}
+div{
+  display:block !important;
+}
+
+#div1{
+      margin-left: 43%;
+}
+        </style>
+
+
+
+</head>
+
+<body>
+
+  <div id="div1"></div>
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+<script type="text/babel">
+
+
+  var Circle = React.createClass({
+          render:function(){
+            var circleStyle = {
+            padding: 10,
+            margin: 20,
+            display: "inline-block",
+            backgroundColor: this.props.bgColor,
+            borderRadius: "50%",
+            width: 100,
+            height: 100,
+          };
+          let text ='';
+          if(this.props.timer == 0){
+              text ='';
+          }
+          else{
+            text= this.props.timer ;
+          }
+              return (
+                  <div style={circleStyle}>
+
+
+                    <span>{text}</span>
+                  </div>
+              );
+          }
+  });
+
+
+var Signal = React.createClass({
+
+    getInitialState:function(){
+        return ({initial1:"red",initial2:"white",initial3:"white",timer1:0,timer2:0,timer3:0});
+    },
+
+    incrementSec:function(){
+      if(this.state.timer1 < 10 && this.state.timer2 == 0 && this.state.timer3 ==0){
+          this.setState({timer1:++this.state.timer1});
+      }
+      else{
+          if(this.state.timer2 < 5  && this.state.timer3 == 0){
+              this.setState({timer2:++this.state.timer2,initial1:"white",initial2:"yellow",initial3:"white",timer1: 0, timer3 :0});
+          }
+          else{
+            if(this.state.timer3 < 10){
+                this.setState({timer3:++this.state.timer3,initial1:"white",initial2:"white",initial3:"green",timer1:0,timer2:0});
+            }
+            else{
+                this.setState({timer3:0,initial1:"red",initial2:"white",initial3:"white",timer1:0,timer2:0});
+            }
+
+          }
+
+      }
+
+    },
+
+    componentDidMount:function(){
+        setInterval(this.incrementSec,1000);
+    },
+
+      render:function(){
+            return(
+                  <div>
+                    <Circle bgColor={this.state.initial1}  timer={this.state.timer1}/>
+                    <Circle bgColor={this.state.initial2}  timer={this.state.timer2}/>
+                    <Circle bgColor={this.state.initial3} timer={this.state.timer3} />
+                  </div>
+            );
+      }
+});
+
+       ReactDOM.render(
+         <div><Signal />
+         </div>,document.getElementById("div1"));
+
+</script>
+
+
+</html>

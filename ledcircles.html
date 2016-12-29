@@ -1,0 +1,70 @@
+<html>
+<head>
+        <title> Track mouse clicks in react</title>
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+        <style>
+span{
+  position: relative;
+top: 33%;
+left: 45%;
+}
+        </style>
+
+</head>
+
+<body>
+
+  <div id="div1"></div>
+
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+<script type="text/babel">
+
+
+  var Circle = React.createClass({
+          render:function(){
+            var circleStyle = {
+            padding: 10,
+            margin: 20,
+            display: "inline-block",
+            backgroundColor: this.props.bgColor,
+            borderRadius: "50%",
+            width: 100,
+            height: 100,
+          };
+
+              return (
+                  <div style={circleStyle}>
+
+                    <span>hi</span>
+                  </div>
+              );
+          }
+  });
+
+
+  function setColors(){
+    var colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363",
+          "#85FFC7", "#297373", "#FF8552", "#A40E4C"],colorsArray=[];
+
+          for(var i=0;i<colors.length;i++){
+              colorsArray.push(<Circle key={i} bgColor={colors[i]}/>);
+          }
+
+          return colorsArray;
+
+  }
+
+       ReactDOM.render(
+         <div>{setColors()}
+         </div>,document.getElementById("div1"));
+
+</script>
+
+
+</html>
